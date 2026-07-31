@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Поэзия — Богдан Гаврильц</title>
+    <style>
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f6f4f0;
+            color: #1a1a1a;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding-top: 1.5rem;
+        }
+
+        /* ===== ШАПКА С ПЛАШКОЙ ===== */
+        .header-bar {
+            width: 100%;
+            max-width: 860px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd8d0;
+            padding-bottom: 0.8rem;
+            transition: border-color 0.3s ease;
+            gap: 1.5rem;
+        }
+
+        .header-bar .brand {
+            font-size: 1rem;
+            font-weight: 450;
+            letter-spacing: -0.01em;
+            color: #3d3a32;
+            opacity: 0.8;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        /* Блок с иконками — ровно правая треть */
+        .theme-bar-wrapper {
+            flex: 0 0 33.333%;
+            max-width: 33.333%;
+            min-width: 200px;
+        }
+
+        .theme-bar {
+            display: flex;
+            height: 42px;
+            border-radius: 0;
+            overflow: visible;
+            border: 2px solid #d0cbc4;
+            background: #f0ede8;
+            transition: border-color 0.3s, background 0.3s;
+            position: relative;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        .theme-bar .segment {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: #5a554a;
+            transition: all 0.2s ease;
+            position: relative;
+            background: transparent;
+            border: none;
+            padding: 0 2px;
+            font-family: inherit;
+            cursor: pointer;
+            user-select: none;
+            gap: 3px;
+            clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);
+            margin-right: -3px;
+            z-index: 1;
+        }
+
+        .theme-bar .segment:first-child {
+            clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 0% 100%);
+            margin-right: -3px;
+        }
+
+        .theme-bar .segment:last-child {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            margin-right: 0;
+        }
+
+        .theme-bar .segment::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: inherit;
+            z-index: 2;
+            clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+            background: #d0cbc4;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .theme-bar .segment:last-child::after {
+            display: none;
+        }
+
+        .theme-bar .segment:hover {
+            background: rgba(0, 0, 0, 0.06);
+            z-index: 3;
+        }
+
+        .theme-bar .segment:hover::after {
+            opacity: 0.2;
+        }
+
+        .theme-bar .segment.active-segment {
+            background: #1a1a1a;
+            color: #ffffff;
+            font-weight: 600;
+            z-index: 4;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+        }
+
+        .theme-bar .segment.active-segment::after {
+            background: #1a1a1a;
+            opacity: 0.8;
+        }
+
+        .theme-bar .segment .seg-icon {
+            font-size: 0.95rem;
+            line-height: 1;
+        }
+
+        .theme-bar .segment .seg-label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== КАРТОЧКА СТИХА ===== */
+        .poem-card {
+            max-width: 860px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2.8rem 3.2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e8e4de;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* ===== ВЕРХНЯЯ ПАНЕЛЬ ===== */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem 1.5rem;
+            margin-bottom: 2.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #e0dbd3;
+            transition: border-color 0.3s ease;
+        }
+
+        .controls-left {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .controls-left .poem-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #7a756c;
+            font-weight: 500;
+        }
+
+        .controls-left .poem-title-small {
+            font-size: 1.1rem;
+            font-weight: 460;
+        }
+
+        /* ===== ТЕКСТ СТИХА ===== */
+        .poem-content {
+            margin-top: 0.4rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .poem-title {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.2rem;
+            line-height: 1.2;
+        }
+
+        .poem-author {
+            font-size: 1rem;
+            font-weight: 350;
+            color: #5f5a52;
+            margin-bottom: 1.6rem;
+            transition: color 0.3s ease;
+        }
+
+        .poem-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .poem-line {
+            font-size: 1.15rem;
+            font-weight: 380;
+            line-height: 1.7;
+            color: #1f1f1f;
+            transition: color 0.3s ease;
+            padding: 0.1rem 0;
+            white-space: pre-wrap;
+        }
+
+        .poem-line:last-child {
+            margin-bottom: 0.2rem;
+        }
+
+        /* ============================================================
+           ТЕМЫ (классы на body)
+           ============================================================ */
+
+        /* ---- ТЕМА: СВЕТ (по умолчанию) ---- */
+        body.theme-light {
+            background-color: #f6f4f0;
+            color: #1a1a1a;
+        }
+        body.theme-light .poem-card {
+            background: #ffffff;
+            border-color: #e8e4de;
+        }
+        body.theme-light .poem-line {
+            color: #1f1f1f;
+        }
+        body.theme-light .poem-author {
+            color: #5f5a52;
+        }
+        body.theme-light .controls {
+            border-bottom-color: #e0dbd3;
+        }
+        body.theme-light .theme-bar {
+            border-color: #d0cbc4;
+            background: #f0ede8;
+        }
+        body.theme-light .theme-bar .segment.active-segment {
+            background: #1a1a1a;
+            color: #fff;
+        }
+        body.theme-light .theme-bar .segment::after {
+            background: #d0cbc4;
+        }
+        body.theme-light .header-bar {
+            border-bottom-color: #ddd8d0;
+        }
+        body.theme-light .header-bar .brand {
+            color: #3d3a32;
+        }
+
+        /* ---- ТЕМА: СЕПИЯ ---- */
+        body.theme-sepia {
+            background-color: #f4ecd8;
+            color: #3b2e1e;
+        }
+        body.theme-sepia .poem-card {
+            background: #faf3e0;
+            border-color: #d4c5a9;
+        }
+        body.theme-sepia .poem-line {
+            color: #3b2e1e;
+        }
+        body.theme-sepia .poem-author {
+            color: #6b5d48;
+        }
+        body.theme-sepia .controls {
+            border-bottom-color: #d4c5a9;
+        }
+        body.theme-sepia .theme-bar {
+            border-color: #c4b598;
+            background: #e8ddc8;
+        }
+        body.theme-sepia .theme-bar .segment.active-segment {
+            background: #3b2e1e;
+            color: #faf3e0;
+        }
+        body.theme-sepia .theme-bar .segment::after {
+            background: #c4b598;
+        }
+        body.theme-sepia .header-bar {
+            border-bottom-color: #d4c5a9;
+        }
+        body.theme-sepia .header-bar .brand {
+            color: #5b4d3a;
+        }
+
+        /* ---- ТЕМА: ЛЕС ---- */
+        body.theme-forest {
+            background-color: #e6efe0;
+            color: #1d3b1a;
+        }
+        body.theme-forest .poem-card {
+            background: #f2f9ec;
+            border-color: #b8cfaa;
+        }
+        body.theme-forest .poem-line {
+            color: #1d3b1a;
+        }
+        body.theme-forest .poem-author {
+            color: #3d5a34;
+        }
+        body.theme-forest .controls {
+            border-bottom-color: #b8cfaa;
+        }
+        body.theme-forest .theme-bar {
+            border-color: #a8c097;
+            background: #dce8d0;
+        }
+        body.theme-forest .theme-bar .segment.active-segment {
+            background: #1d3b1a;
+            color: #f2f9ec;
+        }
+        body.theme-forest .theme-bar .segment::after {
+            background: #a8c097;
+        }
+        body.theme-forest .header-bar {
+            border-bottom-color: #b8cfaa;
+        }
+        body.theme-forest .header-bar .brand {
+            color: #2d4a28;
+        }
+
+        /* ---- ТЕМА: ОКЕАН ---- */
+        body.theme-ocean {
+            background-color: #dce8f0;
+            color: #0b2b44;
+        }
+        body.theme-ocean .poem-card {
+            background: #eef5fa;
+            border-color: #b6cbd9;
+        }
+        body.theme-ocean .poem-line {
+            color: #0b2b44;
+        }
+        body.theme-ocean .poem-author {
+            color: #2a5570;
+        }
+        body.theme-ocean .controls {
+            border-bottom-color: #b6cbd9;
+        }
+        body.theme-ocean .theme-bar {
+            border-color: #a0bcca;
+            background: #c8dbe8;
+        }
+        body.theme-ocean .theme-bar .segment.active-segment {
+            background: #0b2b44;
+            color: #eef5fa;
+        }
+        body.theme-ocean .theme-bar .segment::after {
+            background: #a0bcca;
+        }
+        body.theme-ocean .header-bar {
+            border-bottom-color: #b6cbd9;
+        }
+        body.theme-ocean .header-bar .brand {
+            color: #1e405a;
+        }
+
+        /* ---- ТЕМА: ТЁМНЫЙ ---- */
+        body.theme-dark {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        body.theme-dark .poem-card {
+            background: #262626;
+            border-color: #3d3d3d;
+        }
+        body.theme-dark .poem-line {
+            color: #d4d4d4;
+        }
+        body.theme-dark .poem-author {
+            color: #a0a0a0;
+        }
+        body.theme-dark .controls {
+            border-bottom-color: #3d3d3d;
+        }
+        body.theme-dark .theme-bar {
+            border-color: #444;
+            background: #2a2a2a;
+        }
+        body.theme-dark .theme-bar .segment {
+            color: #aaa;
+        }
+        body.theme-dark .theme-bar .segment.active-segment {
+            background: #bb86fc;
+            color: #1a1a1a;
+        }
+        body.theme-dark .theme-bar .segment:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        body.theme-dark .theme-bar .segment::after {
+            background: #444;
+        }
+        body.theme-dark .header-bar {
+            border-bottom-color: #3d3d3d;
+        }
+        body.theme-dark .header-bar .brand {
+            color: #b0b0b0;
+        }
+
+        /* ---- РЕЖИМ "НОЧЬ" (переопределяем всё) ---- */
+        body.night-mode {
+            background-color: #0a0a1a !important;
+            color: #d0d0e8 !important;
+        }
+        body.night-mode .poem-card {
+            background: #14142a !important;
+            border-color: #2a2a4a !important;
+        }
+        body.night-mode .poem-line {
+            color: #c8c8e0 !important;
+        }
+        body.night-mode .poem-author {
+            color: #8a8aaa !important;
+        }
+        body.night-mode .controls {
+            border-bottom-color: #2a2a4a !important;
+        }
+        body.night-mode .theme-bar {
+            border-color: #3a3a5a !important;
+            background: #1a1a32 !important;
+        }
+        body.night-mode .theme-bar .segment {
+            color: #8a8aaa !important;
+        }
+        body.night-mode .theme-bar .segment.active-segment {
+            background: #6a5acd !important;
+            color: #f0f0ff !important;
+        }
+        body.night-mode .theme-bar .segment:hover {
+            background: rgba(100, 80, 200, 0.2) !important;
+        }
+        body.night-mode .theme-bar .segment::after {
+            background: #3a3a5a !important;
+        }
+        body.night-mode .header-bar {
+            border-bottom-color: #2a2a4a !important;
+        }
+        body.night-mode .header-bar .brand {
+            color: #8a8aaa !important;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 780px) {
+            .header-bar {
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                padding-bottom: 0.6rem;
+            }
+            .header-bar .brand {
+                white-space: normal;
+                width: 100%;
+                text-align: center;
+                font-size: 0.9rem;
+            }
+            .theme-bar-wrapper {
+                flex: 0 0 100%;
+                max-width: 100%;
+                min-width: unset;
+            }
+            .theme-bar {
+                width: 100%;
+                height: 38px;
+                border-radius: 0;
+                clip-path: none;
+            }
+            .theme-bar .segment {
+                clip-path: none !important;
+                margin-right: 0 !important;
+                border-right: 1px solid rgba(0, 0, 0, 0.06);
+                font-size: 0.6rem;
+            }
+            .theme-bar .segment:last-child {
+                border-right: none;
+            }
+            .theme-bar .segment::after {
+                display: none !important;
+            }
+            .theme-bar .segment .seg-label {
+                display: none;
+            }
+            .theme-bar .segment .seg-icon {
+                font-size: 1rem;
+            }
+            body.night-mode .theme-bar .segment {
+                border-right-color: rgba(255, 255, 255, 0.06);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+            }
+            .controls-left {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1.2rem 0.8rem;
+                padding-top: 0.8rem;
+            }
+            .poem-card {
+                padding: 1.5rem 1.2rem;
+                border-radius: 16px;
+            }
+            .poem-title {
+                font-size: 1.6rem;
+            }
+            .poem-line {
+                font-size: 1rem;
+            }
+            .theme-bar {
+                height: 34px;
+            }
+            .theme-bar .segment .seg-icon {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .theme-bar .segment .seg-icon {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body class="theme-light">
+    <!-- ===== ШАПКА: блок с иконками ровно в правой трети ===== -->
+    <header class="header-bar">
+        <span class="brand">Богдан Гаврилец</span>
+        <div class="theme-bar-wrapper">
+            <div class="theme-bar" id="themeBar">
+                <button class="segment active-segment" data-theme="light" title="Свет">
+                    <span class="seg-icon">☀️</span>
+                    <span class="seg-label"></span>
+                </button>
+                <button class="segment" data-theme="sepia" title="Сепия">
+                    <span class="seg-icon">🪐</span>
+                    <span class="seg-label"></span>
+                </button>
+                <button class="segment" data-theme="forest" title="Лес">
+                    <span class="seg-icon">🌌</span>
+                    <span class="seg-label"></span>
+                </button>
+                <button class="segment" data-theme="ocean" title="Океан">
+                    <span class="seg-icon">🌠/span>
+                    <span class="seg-label">О</span>
+                </button>
+                <button class="segment" data-theme="dark" title="Тёмный">
+                    <span class="seg-icon">🌑</span>
+                    <span class="seg-label"></span>
+                </button>
+                <button class="segment" data-theme="night" title="Ночь">
+                    <span class="seg-icon">🌃</span>
+                    <span class="seg-label"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== КАРТОЧКА СО СТИХОМ ===== -->
+    <div class="poem-card">
+
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+        <div class="controls">
+            <div class="controls-left">
+                <span class="poem-label">Поэзия</span>
+                <span class="poem-title-small">Рукопожатие</span>
+            </div>
+        </div>
+
+        <!-- ТЕКСТ СТИХА -->
+        <div class="poem-content">
+            <h1 class="poem-title">Рукопожатие</h1>
+            <div class="poem-author"></div>
+            <div class="poem-body">
+                <div class="poem-line">Мы пожимали руки раньше,</div>
+                <div class="poem-line">За тем чтобы узнать</div>
+                <div class="poem-line">Не спрятал ли в рукав он фальши,</div>
+                <div class="poem-line">Клинка.</div>
+                <div class="poem-line">И я сейчас про средние века.</div>
+                <div class="poem-line">Уже мечей не кто не носит</div>
+                <div class="poem-line">Но руки жмут изо дня в день.</div>
+                <div class="poem-line">Порою редкостным скотинам.</div>
+                <div class="poem-line">При встрече и прощание — БЕЕЕ</div>
+                <div class="poem-line">Кричит бараном, тот кто жмет</div>
+                <div class="poem-line">Налево и направо.</div>
+                <div class="poem-line">Забыв о том, что можешь</div>
+                <div class="poem-line">Ты решать,</div>
+                <div class="poem-line">И этой вежливою волей на гниль внутри персоны указать.</div>
+                <div class="poem-line">Увидел ты, что собеседник сильно плох</div>
+                <div class="poem-line">Не в смысле болен,</div>
+                <div class="poem-line">А в смысле лжив,</div>
+                <div class="poem-line">Жесток,</div>
+                <div class="poem-line">По черному логичен.</div>
+                <div class="poem-line">Тебе решать, пустить ли его ближе</div>
+                <div class="poem-line">Иль ограничить, отстранить,</div>
+                <div class="poem-line">Пример другим подать,</div>
+                <div class="poem-line">Кто суть рукопожатия не устроил.</div>
+                <div class="poem-line">Как автор этого стиха.</div>
+                <div class="poem-line">Когда-то был так плох.</div>
+                <div class="poem-line">И тут как-будто важно знать,</div>
+                <div class="poem-line">Что это не навечно. И человек</div>
+                <div class="poem-line">Изменчивый есть зверь.</div>
+                <div class="poem-line">И если ты упрешься в глупость,</div>
+                <div class="poem-line">Иль непонимание не пожатой руки.</div>
+                <div class="poem-line">Считай помог, коль коротко и ясно объяснил</div>
+                <div class="poem-line">— Не прав, по-моему ты здесь и здесь.</div>
+                <div class="poem-line">Я руку жать тебе не буду.</div>
+                <div class="poem-line">А жизнь идет</div>
+                <div class="poem-line">И может будет там камбэк,</div>
+                <div class="poem-line">Даже для конченной Иуды.</div>
+                <div class="poem-line" style="margin-top:0.8rem; font-style:italic; color:#7a756c;">Июнь 2026</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        (function() {
+            const body = document.body;
+            const segments = document.querySelectorAll('.theme-bar .segment');
+
+            function applyTheme(theme) {
+                // Снимаем все классы
+                body.classList.remove('theme-light', 'theme-sepia', 'theme-forest', 'theme-ocean', 'theme-dark',
+                    'night-mode');
+
+                if (theme === 'night') {
+                    body.classList.add('night-mode');
+                    body.classList.add('theme-light');
+                } else {
+                    body.classList.add('theme-' + theme);
+                }
+
+                // Обновляем активный сегмент
+                segments.forEach(seg => {
+                    seg.classList.remove('active-segment');
+                    if (seg.dataset.theme === theme) {
+                        seg.classList.add('active-segment');
+                    }
+                });
+            }
+
+            // Обработчики кликов по сегментам
+            segments.forEach(seg => {
+                seg.addEventListener('click', function(e) {
+                    const theme = this.dataset.theme;
+                    if (theme) {
+                        applyTheme(theme);
+                    }
+                });
+            });
+
+            // Стартовая инициализация — Свет
+            applyTheme('light');
+        })();
+    </script>
+</body>
+</html>
