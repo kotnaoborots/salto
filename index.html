@@ -480,8 +480,8 @@
 
     <!-- Кнопка тёмной темы -->
     <button class="theme-toggle" id="themeToggle">
-        <span id="themeIcon">🌙</span>
-        <span id="themeLabel">ТЕМНАЯ</span>
+        <span id="themeIcon">⬛</span>
+        <span id="themeLabel">⬛</span>
     </button>
 
     <div class="relative h-screen w-screen grid-lines">
@@ -513,11 +513,11 @@
                 <div>
                     <div class="w-10 h-px bg-blue-400 mb-8"></div>
                     <p class="text-sm leading-8 text-slate-600 max-w-xs" id="quote">
-                        «Я иду по лабиринту<br>
-                        не затем,<br>
-                        чтобы найти выход,<br>
-                        а чтобы услышать<br>
-                        эхо собственного голоса.»
+                        «Этот текст не будет виден<br>
+                        Может я и не писал,<br>
+                        Если кто меня обидел,<br>
+                        Здесь прочтешь его<br>
+                        Ты сдал.»
                     </p>
                     <p class="mt-6 text-sm text-blue-700" id="quoteAuthor">— Б.Г.</p>
                     <p class="mt-20 text-xs tracking-widest text-slate-400">© 2026</p>
@@ -552,8 +552,8 @@
                 <div class="absolute left-[34%] top-[18%]">
                     <h2 class="font-serif uppercase tracking-[10px] text-blue-700 text-6xl" id="heroTitle">КОСМОС</h2>
                     <p class="mt-10 leading-10 text-slate-600" id="heroDesc">
-                        когда слова — нить,<br>
-                        а тишина — пространство.
+                        <br>Мда, интерестно конечно
+                        здесь галерея моего исскуства.
                     </p>
                     <div class="mt-12 w-40 h-px bg-blue-500"></div>
                 </div>
@@ -570,8 +570,8 @@
                 </div>
 
                 <div class="absolute left-[46%] bottom-28">
-                    <p class="font-serif tracking-[5px] uppercase text-blue-700 text-xl" id="welcome1">ДОБРО ПОЖАЛОВАТЬ</p>
-                    <p class="font-serif tracking-[5px] uppercase text-blue-700 text-xl mt-3" id="welcome2">В МУЛЬТИВСЕЛЕННУЮ СЛОВ</p>
+                    <p class="font-serif tracking-[5px] uppercase text-blue-700 text-xl" id="welcome1">Кот наоборот или</p>
+                    <p class="font-serif tracking-[5px] uppercase text-blue-700 text-xl mt-3" id="welcome2">Метафоричное сальто через себя</p>
                     <div class="mt-10 flex justify-center">
                         <div class="w-px h-24 bg-blue-400"></div>
                     </div>
@@ -584,58 +584,56 @@
     </div>
 
     <script>
-        // ----- МУЛЬТИЯЗЫЧНОСТЬ (ru, en, es) -----
-        const translations = {
-            ru: {
-                name: 'Богдан Гаврилец',
-                subtitle: 'поэт / писатель / сценарист<br>маркетолог / креативщик',
-                nav1: 'СТИХИ',
-                nav2: 'ПРОЗА',
-                nav3: 'СЦЕНАРИИ',
-                nav4: 'МЫСЛИ',
-                nav5: 'ОБО МНЕ',
-                nav6: 'КОНТАКТЫ',
-                quote: '«Я иду по лабиринту<br>не затем,<br>чтобы найти выход,<br>а чтобы услышать<br>эхо собственного голоса.»',
-                quoteAuthor: '— Б.Г.',
-                menuLabel: 'МЕНЮ',
-                heroTitle: 'КОСМОС',
-                heroDesc: 'когда слова — нить,<br>а тишина — пространство.',
-                welcome1: 'ДОБРО ПОЖАЛОВАТЬ',
-                welcome2: 'В МУЛЬТИВСЕЛЕННУЮ СЛОВ'
-            },
-            en: {
-                name: 'Bohdan Havrylets',
-                subtitle: 'poet / writer / screenwriter<br>marketer / creative',
-                nav1: 'POEMS',
-                nav2: 'PROSE',
-                nav3: 'SCRIPTS',
-                nav4: 'THOUGHTS',
-                nav5: 'ABOUT ME',
-                nav6: 'CONTACTS',
-                quote: '«I walk through the labyrinth<br>not to find the exit,<br>but to hear<br>the echo of my own voice.»',
-                quoteAuthor: '— B.H.',
-                menuLabel: 'MENU',
-                heroTitle: 'COSMOS',
-                heroDesc: 'when words are a thread,<br>and silence is space.',
-                welcome1: 'WELCOME',
-                welcome2: 'TO THE MULTIVERSE OF WORDS'
-            },
-            es: {
-                name: 'Bohdan Havrylets',
-                subtitle: 'poeta / escritor / guionista<br>marketer / creativo',
-                nav1: 'POEMAS',
-                nav2: 'PROSA',
-                nav3: 'GUIONES',
-                nav4: 'PENSAMIENTOS',
-                nav5: 'SOBRE MÍ',
-                nav6: 'CONTACTOS',
-                quote: '«Recorro el laberinto<br>no para encontrar la salida,<br>sino para escuchar<br>el eco de mi propia voz.»',
-                quoteAuthor: '— B.H.',
-                menuLabel: 'MENÚ',
-                heroTitle: 'COSMOS',
-                heroDesc: 'cuando las palabras son hilo,<br>y el silencio es espacio.',
-                welcome1: 'BIENVENIDO',
-                welcome2: 'AL MULTIVERSO DE PALABRAS'
+const translations = {
+    ru: {
+        name: 'Богдан Гаврилец',
+        subtitle: 'поэт / писатель / сценарист<br>маркетолог / креативщик',
+        nav1: 'СТИХИ',
+        nav2: 'ДЕТСКИЙ РОМАН В СТИХАХ "Брегантина"',
+        nav3: 'ПЪЕССА "Два поэта" (18+)',
+        nav4: 'ПЪЕССА "Л" (18+)',
+        nav5: 'ОБО МНЕ',
+        quote: '«Мда, интерестно конечно,<br>здесь галерея моего исскуства.<br>»',
+        quoteAuthor: '— Б.Г.',
+        menuLabel: 'МЕНЮ',
+        heroTitle: 'КОСМОС',
+        heroDesc: 'Кот наоборот или,<br>метафоричное сальто через себя.',
+        welcome1: 'ДОБРО ПОЖАЛОВАТЬ',
+        welcome2: 'В МУЛЬТИВСЕЛЕННУЮ СЛОВ'
+    },
+    en: {
+        name: 'Bohdan Gavrilets',
+        subtitle: 'poet / writer / screenwriter<br>marketer / creative',
+        nav1: 'POEMS',
+        nav2: 'CHILDREN\'S NOVEL IN VERSE "Brehanatyna"',
+        nav3: 'PLAY "Two Poets" (18+)',
+        nav4: 'PLAY "L" (18+)',
+        nav5: 'ABOUT ME',
+        quote: '«Well, interesting, of course,<br>here is a gallery of my art.»',
+        quoteAuthor: '— B.G.',
+        menuLabel: 'MENU',
+        heroTitle: 'COSMOS',
+        heroDesc: 'Cat backwards, or<br>a metaphorical somersault over oneself.',
+        welcome1: 'WELCOME',
+        welcome2: 'TO THE MULTIVERSE OF WORDS'
+    },
+    es: {
+        name: 'Bohdan Havrylets',
+        subtitle: 'poeta / escritor / guionista<br>marketing / creativo',
+        nav1: 'POEMAS',
+        nav2: 'NOVELA INFANTIL EN VERSO "Brehanatyna"',
+        nav3: 'OBRA "Dos poetas" (18+)',
+        nav4: 'OBRA "L" (18+)',
+        nav5: 'SOBRE MÍ',
+        quote: '«Bueno, interesante, claro,<br>aquí hay una galería de mi arte.»',
+        quoteAuthor: '— B.H.',
+        menuLabel: 'MENÚ',
+        heroTitle: 'COSMOS',
+        heroDesc: 'Gato al revés, o<br>una voltereta metafórica sobre uno mismo.',
+        welcome1: 'BIENVENIDO',
+        welcome2: 'AL MULTIVERSO DE LAS PALABRAS'
+    }
+};
             }
         };
 
