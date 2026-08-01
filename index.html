@@ -688,8 +688,8 @@
         function toggleTheme() {
             darkMode = !darkMode;
             document.body.classList.toggle('dark', darkMode);
-            themeIcon.textContent = darkMode ? '☀️' : '🌙';
-            themeLabel.textContent = darkMode ? 'СВЕТЛАЯ' : 'ТЕМНАЯ';
+            themeIcon.textContent = darkMode ? '⬜' : '⬛';
+            themeLabel.textContent = darkMode ? '' : '';
         }
 
         themeToggle.addEventListener('click', toggleTheme);
