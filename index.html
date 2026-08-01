@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Богдан Гаврилец</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config={
+theme:{
+extend:{
+fontFamily:{
+serif:["Georgia","Times New Roman","serif"],
+sans:["Inter","sans-serif"]
+},
+colors:{
+line:"#87A9FF",
+text:"#2959B6"
+}
+}
+}
+}
+</script>
+
+<style>
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#ffffff;
+overflow:hidden;
+}
+
+/* декоративные линии */
+
+.grid-lines::before{
+content:"";
+position:absolute;
+left:28%;
+top:0;
+width:1px;
+height:100%;
+background:#8cb0ff;
+opacity:.35;
+}
+
+.grid-lines::after{
+content:"";
+position:absolute;
+left:0;
+top:355px;
+width:28%;
+height:1px;
+background:#8cb0ff;
+opacity:.35;
+}
+
+/* фон */
+
+.cosmos{
+
+position:absolute;
+inset:0;
+
+background:
+radial-gradient(circle at 70% 30%,rgba(125,170,255,.18),transparent 25%),
+radial-gradient(circle at 40% 75%,rgba(125,170,255,.15),transparent 20%),
+radial-gradient(circle at 80% 80%,rgba(125,170,255,.12),transparent 20%),
+linear-gradient(white,white);
+
+overflow:hidden;
+
+}
+
+/* орбиты */
+
+.orbit{
+
+position:absolute;
+border:1px solid rgba(110,150,255,.18);
+border-radius:9999px;
+
+}
+
+.orbit:nth-child(1){
+
+width:600px;
+height:600px;
+
+left:45%;
+top:20%;
+
+transform:rotate(12deg);
+
+}
+
+.orbit:nth-child(2){
+
+width:900px;
+height:900px;
+
+left:25%;
+top:48%;
+
+transform:rotate(-15deg);
+
+}
+
+.orbit:nth-child(3){
+
+width:420px;
+height:420px;
+
+left:60%;
+top:50%;
+
+}
+
+/* точки */
+
+.star{
+
+position:absolute;
+
+width:6px;
+height:6px;
+
+background:#3b82f6;
+
+border-radius:9999px;
+
+opacity:.7;
+
+}
+
+.portal{
+
+position:absolute;
+
+left:57%;
+top:48%;
+
+width:170px;
+height:250px;
+
+background:
+linear-gradient(180deg,#2d5de5,#e8f1ff);
+
+border-radius:6px;
+
+box-shadow:
+0 0 80px rgba(70,120,255,.35);
+
+opacity:.85;
+
+}
+
+.portal:after{
+
+content:"";
+
+position:absolute;
+
+left:50%;
+transform:translateX(-50%);
+
+top:18px;
+
+width:40px;
+height:215px;
+
+background:white;
+
+}
+
+.walk{
+
+position:absolute;
+
+left:55%;
+top:64%;
+
+width:340px;
+height:2px;
+
+background:
+linear-gradient(90deg,transparent,#8ab2ff,transparent);
+
+transform:rotate(-18deg);
+
+opacity:.4;
+
+}
+
+.menu-item{
+
+transition:.35s;
+
+}
+
+.menu-item:hover{
+
+color:#1d4ed8;
+padding-left:10px;
+
+}
+
+.number{
+
+letter-spacing:5px;
+font-size:12px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="relative h-screen w-screen grid-lines">
+
+<div class="grid grid-cols-[340px_1fr] h-full">
+
+<!-- SIDEBAR -->
+
+<aside class="flex flex-col justify-between px-12 py-16">
+
+<div>
+
+<h1 class="font-serif tracking-[6px] uppercase text-3xl text-text">
+
+Богдан Гаврилец
+
+</h1>
+
+<p class="mt-5 text-sm leading-8 text-slate-700">
+
+поэт / писатель / сценарист<br>
+
+маркетолог / креативщик
+
+</p>
+
+</div>
+
+<nav class="space-y-8 text-4xl font-serif tracking-[5px]">
+
+<a class="menu-item block">СТИХИ</a>
+
+<a class="menu-item block">ПРОЗА</a>
+
+<a class="menu-item block">СЦЕНАРИИ</a>
+
+<a class="menu-item block">МЫСЛИ</a>
+
+<a class="menu-item block">ОБО МНЕ</a>
+
+<a class="menu-item block">КОНТАКТЫ</a>
+
+</nav>
+
+<div>
+
+<div class="w-10 h-px bg-blue-400 mb-8"></div>
+
+<p class="text-sm leading-8 text-slate-600 max-w-xs">
+
+«Я иду по лабиринту
+
+не затем,
+
+чтобы найти выход,
+
+а чтобы услышать
+
+эхо собственного голоса.»
+
+</p>
+
+<p class="mt-6 text-sm text-blue-700">
+
+— Б.Г.
+
+</p>
+
+<p class="mt-20 text-xs tracking-widest text-slate-400">
+
+© 2026
+
+</p>
+
+</div>
+
+</aside>
+
+<!-- HERO -->
+
+<section class="relative overflow-hidden">
+
+<div class="cosmos">
+
+<div class="orbit"></div>
+<div class="orbit"></div>
+<div class="orbit"></div>
+
+<div class="portal"></div>
+
+<div class="walk"></div>
+
+<div class="star" style="left:58%;top:18%"></div>
+<div class="star" style="left:69%;top:25%"></div>
+<div class="star" style="left:74%;top:44%"></div>
+<div class="star" style="left:82%;top:68%"></div>
+<div class="star" style="left:60%;top:78%"></div>
+
+</div>
+
+<div class="absolute top-12 right-14 flex items-center gap-6">
+
+<div class="tracking-[5px] text-blue-700">
+
+МЕНЮ
+
+</div>
+
+<div class="space-y-2">
+
+<div class="w-10 h-px bg-blue-500"></div>
+<div class="w-10 h-px bg-blue-500"></div>
+
+</div>
+
+</div>
+
+<div class="absolute left-[34%] top-[18%]">
+
+<h2 class="font-serif uppercase tracking-[10px] text-blue-700 text-6xl">
+
+КОСМОС
+
+</h2>
+
+<p class="mt-10 leading-10 text-slate-600">
+
+когда слова — нить,<br>
+
+а тишина — пространство.
+
+</p>
+
+<div class="mt-12 w-40 h-px bg-blue-500"></div>
+
+</div>
+
+<div class="absolute right-10 top-[34%]">
+
+<div class="space-y-7 number text-blue-600">
+
+<div>01</div>
+<div>02</div>
+<div>03</div>
+<div>04</div>
+<div>05</div>
+<div>06</div>
+
+</div>
+
+</div>
+
+<div class="absolute left-[46%] bottom-28">
+
+<p class="font-serif tracking-[5px] uppercase text-blue-700 text-xl">
+
+ДОБРО ПОЖАЛОВАТЬ
+
+</p>
+
+<p class="font-serif tracking-[5px] uppercase text-blue-700 text-xl mt-3">
+
+В МУЛЬТИВСЕЛЕННУЮ СЛОВ
+
+</p>
+
+<div class="mt-10 flex justify-center">
+
+<div class="w-px h-24 bg-blue-400"></div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+</body>
+</html>
