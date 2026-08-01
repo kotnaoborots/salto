@@ -321,20 +321,22 @@ font-size:12px;
 
 </div>
 
-<div class="absolute top-12 right-14 flex items-center gap-6">
+<div class="absolute top-12 right-14 z-50">
+
+<button id="menuButton" class="flex items-center gap-6 cursor-pointer">
 
 <div class="tracking-[5px] text-blue-700">
-
 МЕНЮ
-
 </div>
 
 <div class="space-y-2">
 
-<div class="w-10 h-px bg-blue-500"></div>
-<div class="w-10 h-px bg-blue-500"></div>
+<div id="line1" class="w-10 h-px bg-blue-500 transition-all duration-300"></div>
+<div id="line2" class="w-10 h-px bg-blue-500 transition-all duration-300"></div>
 
 </div>
+
+</button>
 
 </div>
 
@@ -396,10 +398,79 @@ font-size:12px;
 </div>
 
 </section>
+  <!-- Выезжающее меню -->
+
+<div id="drawer"
+class="fixed top-0 right-0 h-screen w-96 bg-white border-l border-blue-200 shadow-2xl translate-x-full transition-transform duration-500 z-40">
+
+<div class="flex flex-col justify-center h-full px-14">
+
+<nav class="space-y-8 text-4xl font-serif tracking-[5px]">
+
+<a href="#" class="menu-item block">1</a>
+
+<a href="#" class="menu-item block">2</a>
+
+<a href="#" class="menu-item block">3</a>
+
+<a href="#" class="menu-item block">4</a>
+
+<a href="#" class="menu-item block">5</a>
+
+<a href="#" class="menu-item block">6</a>
+
+</nav>
+
+</div>
+
+</div>
 
 </div>
 
 </div>
 
 </body>
+  <script>
+
+const button=document.getElementById("menuButton");
+const drawer=document.getElementById("drawer");
+
+const line1=document.getElementById("line1");
+const line2=document.getElementById("line2");
+
+let open=false;
+
+button.onclick=()=>{
+
+open=!open;
+
+if(open){
+
+drawer.classList.remove("translate-x-full");
+
+line1.style.transform="translateY(5px) rotate(45deg)";
+line2.style.transform="translateY(-5px) rotate(-45deg)";
+
+}else{
+
+drawer.classList.add("translate-x-full");
+
+line1.style.transform="";
+line2.style.transform="";
+
+}
+
+};
+
+document.addEventListener("keydown",(e)=>{
+
+if(e.key==="Escape" && open){
+
+button.click();
+
+}
+
+});
+
+</script>
 </html>
