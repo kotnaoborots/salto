@@ -7,7 +7,300 @@
     <style>
         /* ===== БАЗОВЫЕ СТИЛИ ===== */
         * {
-            margin: 0;
+            margin: 0;<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Богдан Гаврилец · чтение</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ["Georgia", "Times New Roman", "serif"],
+            sans: ["Inter", "sans-serif"]
+          },
+          colors: {
+            line: "#87A9FF",
+            text: "#2959B6"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #fafcff; }
+
+    /* мягкая сетка, как в оригинале */
+    .grid-lines::before {
+      content: "";
+      position: absolute;
+      left: 28%;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      background: #8cb0ff;
+      opacity: .2;
+    }
+    .grid-lines::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 355px;
+      width: 28%;
+      height: 1px;
+      background: #8cb0ff;
+      opacity: .2;
+    }
+
+    /* лёгкое космическое свечение */
+    .reading-bg {
+      background:
+        radial-gradient(circle at 70% 20%, rgba(125,170,255,.10), transparent 30%),
+        radial-gradient(circle at 30% 70%, rgba(125,170,255,.08), transparent 25%),
+        linear-gradient(180deg, #f2f7ff 0%, #ffffff 100%);
+    }
+
+    /* декоративные орбиты (почти незаметные) */
+    .orbit-soft {
+      position: absolute;
+      border: 1px solid rgba(110,150,255,.10);
+      border-radius: 9999px;
+    }
+
+    .menu-item {
+      transition: .25s;
+      cursor: default;
+    }
+    .menu-item:hover {
+      color: #1d4ed8;
+      padding-left: 10px;
+    }
+
+    /* кастомный скролл */
+    .reading-content::-webkit-scrollbar {
+      width: 3px;
+    }
+    .reading-content::-webkit-scrollbar-track {
+      background: #eef3ff;
+    }
+    .reading-content::-webkit-scrollbar-thumb {
+      background: #8cb0ff;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="relative h-screen w-screen grid-lines overflow-hidden">
+
+    <!-- главная сетка: сайдбар + контент -->
+    <div class="grid grid-cols-[340px_1fr] h-full">
+
+      <!-- SIDEBAR (как в оригинале) -->
+      <aside class="flex flex-col justify-between px-12 py-16 bg-white/60 backdrop-blur-sm">
+        <div>
+          <h1 class="font-serif tracking-[6px] uppercase text-3xl text-text">
+            Богдан Гаврилец
+          </h1>
+          <p class="mt-5 text-sm leading-8 text-slate-700">
+            поэт / писатель / сценарист<br>
+            маркетолог / креативщик
+          </p>
+        </div>
+
+        <nav class="space-y-8 text-4xl font-serif tracking-[5px]">
+          <a class="menu-item block">СТИХИ</a>
+          <a class="menu-item block">ПРОЗА</a>
+          <a class="menu-item block">СЦЕНАРИИ</a>
+          <a class="menu-item block">МЫСЛИ</a>
+          <a class="menu-item block">ОБО МНЕ</a>
+          <a class="menu-item block">КОНТАКТЫ</a>
+        </nav>
+
+        <div>
+          <div class="w-10 h-px bg-blue-400 mb-8"></div>
+          <p class="text-sm leading-8 text-slate-600 max-w-xs">
+            «Я иду по лабиринту<br>
+            не затем,<br>
+            чтобы найти выход,<br>
+            а чтобы услышать<br>
+            эхо собственного голоса.»
+          </p>
+          <p class="mt-6 text-sm text-blue-700">— Б.Г.</p>
+          <p class="mt-20 text-xs tracking-widest text-slate-400">© 2026</p>
+        </div>
+      </aside>
+
+      <!-- ОСНОВНАЯ ЗОНА ЧТЕНИЯ (шаблон для произведения) -->
+      <section class="relative overflow-y-auto reading-content bg-white/40 backdrop-blur-sm">
+        <!-- мягкий космический фон -->
+        <div class="absolute inset-0 reading-bg -z-10">
+          <!-- пара полупрозрачных орбит для настроения -->
+          <div class="orbit-soft" style="width:500px; height:500px; left:60%; top:10%; transform:rotate(8deg);"></div>
+          <div class="orbit-soft" style="width:700px; height:700px; left:20%; top:50%; transform:rotate(-12deg);"></div>
+          <div class="orbit-soft" style="width:300px; height:300px; left:70%; top:60%;"></div>
+          <!-- крошечные звёзды (не отвлекают) -->
+          <div class="absolute w-1.5 h-1.5 bg-blue-300/50 rounded-full" style="left:75%; top:15%;"></div>
+          <div class="absolute w-1.5 h-1.5 bg-blue-300/50 rounded-full" style="left:85%; top:40%;"></div>
+          <div class="absolute w-1.5 h-1.5 bg-blue-300/50 rounded-full" style="left:30%; top:80%;"></div>
+          <div class="absolute w-1.5 h-1.5 bg-blue-300/50 rounded-full" style="left:90%; top:70%;"></div>
+        </div>
+
+        <!-- КНОПКА МЕНЮ (как в оригинале, но остаётся всегда) -->
+        <div class="absolute top-8 right-10 z-30">
+          <button id="menuButton" class="flex items-center gap-6 cursor-pointer">
+            <div class="tracking-[5px] text-blue-700 text-sm">МЕНЮ</div>
+            <div class="space-y-2">
+              <div id="line1" class="w-10 h-px bg-blue-500 transition-all duration-300"></div>
+              <div id="line2" class="w-10 h-px bg-blue-500 transition-all duration-300"></div>
+            </div>
+          </button>
+        </div>
+
+        <!-- ЦЕНТРАЛЬНЫЙ БЛОК С ТЕКСТОМ (шаблон) -->
+        <div class="relative z-10 max-w-3xl mx-auto px-8 py-24 md:py-32">
+
+          <!-- шапка произведения -->
+          <div class="mb-16 border-b border-blue-200/50 pb-8">
+            <p class="text-xs tracking-[6px] uppercase text-blue-500/70 mb-3">проза · рассказ</p>
+            <h2 class="font-serif text-5xl md:text-6xl text-text tracking-wide leading-[1.15]">
+              Лабиринт<br>
+              <span class="text-3xl md:text-4xl font-light text-slate-500 tracking-[2px]">и эхо</span>
+            </h2>
+            <div class="flex items-center gap-6 mt-6 text-sm text-slate-500">
+              <span>2025</span>
+              <span class="w-6 h-px bg-blue-300/60"></span>
+              <span>~ 7 мин чтения</span>
+            </div>
+          </div>
+
+          <!-- сам текст (заглушка — можно менять под любое произведение) -->
+          <div class="space-y-8 text-slate-700 leading-[2.1] text-lg md:text-xl font-serif tracking-wide">
+
+            <p class="first-letter:text-5xl first-letter:font-serif first-letter:text-blue-600 first-letter:mr-2 first-letter:float-left">
+              Тишина была густой, как смола. Каждый шаг отдавался в сводах, но не возвращался — 
+              словно стены проглатывали звук, оставляя только ощущение движения. 
+              Я шёл не для того, чтобы найти выход. Я искал эхо.
+            </p>
+
+            <p>
+              В этом лабиринте время текло иначе. Иногда мне казалось, что я прохожу 
+              мимо одного и того же поворота, но свет падал под другим углом, и тени 
+              рисовали незнакомые узоры. Может быть, лабиринт дышал. Может быть, 
+              он был живым существом, которое позволяло мне блуждать по своим артериям.
+            </p>
+
+            <p>
+              Я остановился у стены, провёл пальцами по шершавому камню. 
+              На ощупь — тепло, как у человека. И тогда я заговорил. 
+              Сначала шёпотом, потом громче. Слова падали в темноту и… 
+              возвращались, но уже чужими, обросшими смыслом. 
+              Это было похоже на диалог с самим собой, только на другом языке.
+            </p>
+
+            <div class="my-12 border-l-4 border-blue-400/40 pl-8 italic text-slate-500">
+              «Я иду по лабиринту не затем, чтобы найти выход, а чтобы услышать эхо собственного голоса.»
+            </div>
+
+            <p>
+              Где-то в глубине послышался отдалённый звук — будто кто-то тоже говорил, 
+              но не словами, а паузами. Я пошёл на этот звук, и лабиринт начал меняться: 
+              проходы сужались, расширялись, пол уходил вниз, а потом резко поднимался. 
+              Я понял, что приближаюсь к центру.
+            </p>
+
+            <p>
+              Центр оказался круглой залой, залитой голубоватым светом. 
+              В середине — неглубокий бассейн, а в нём не вода, а небо. 
+              Звёзды двигались медленно, как будто дышали. Я наклонился, 
+              и моё отражение улыбнулось мне, хотя я не улыбался.
+            </p>
+
+            <p>
+              — Ты пришёл, — сказало отражение. — Теперь ты можешь остаться здесь навсегда 
+              или вернуться и рассказать другим, что лабиринт — это не стены, 
+              а тишина между словами.
+            </p>
+
+            <p class="text-slate-500">
+              Я развернулся и пошёл обратно. И эхо, наконец, стало моим голосом.
+            </p>
+
+          </div>
+
+          <!-- нижняя навигация (условно) -->
+          <div class="mt-20 pt-10 border-t border-blue-200/30 flex flex-wrap items-center justify-between gap-4 text-sm text-slate-400">
+            <span>← предыдущее</span>
+            <span class="tracking-[4px] text-blue-600/70">✧  ✧  ✧</span>
+            <span>следующее →</span>
+          </div>
+
+        </div>
+
+        <!-- небольшая декорация внизу (цифры, как в оригинале) -->
+        <div class="absolute right-8 top-1/2 -translate-y-1/2 space-y-5 text-xs tracking-[4px] text-blue-300/40 writing-mode-vertical hidden md:block">
+          <div>01</div>
+          <div>02</div>
+          <div>03</div>
+          <div>04</div>
+          <div>05</div>
+          <div>06</div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- Выезжающее меню (как в оригинале, с тем же функционалом) -->
+    <div id="drawer" class="fixed top-0 right-0 h-screen w-96 bg-white/90 backdrop-blur-xl border-l border-blue-200/60 shadow-2xl translate-x-full transition-transform duration-500 z-40">
+      <div class="flex flex-col justify-center h-full px-14">
+        <nav class="space-y-8 text-4xl font-serif tracking-[5px] text-slate-700">
+          <a href="#" class="menu-item block">1</a>
+          <a href="#" class="menu-item block">2</a>
+          <a href="#" class="menu-item block">3</a>
+          <a href="#" class="menu-item block">4</a>
+          <a href="#" class="menu-item block">5</a>
+          <a href="#" class="menu-item block">6</a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function() {
+      const button = document.getElementById('menuButton');
+      const drawer = document.getElementById('drawer');
+      const line1 = document.getElementById('line1');
+      const line2 = document.getElementById('line2');
+      let open = false;
+
+      button.addEventListener('click', function(e) {
+        e.stopPropagation();
+        open = !open;
+        if (open) {
+          drawer.classList.remove('translate-x-full');
+          line1.style.transform = 'translateY(5px) rotate(45deg)';
+          line2.style.transform = 'translateY(-5px) rotate(-45deg)';
+        } else {
+          drawer.classList.add('translate-x-full');
+          line1.style.transform = '';
+          line2.style.transform = '';
+        }
+      });
+
+      // закрытие по Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && open) {
+          button.click();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
             padding: 0;
             box-sizing: border-box;
         }
